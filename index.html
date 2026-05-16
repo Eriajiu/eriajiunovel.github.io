@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giao diện tương tự Fanqie Novel</title>
+    <style>
+        /* --- RESET & BASIC STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* --- CONTAINER --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #ff5722; /* Màu cam đặc trưng */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #111;
+        }
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        .nav-links a {
+            font-size: 16px;
+            font-weight: 500;
+            color: #555;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #ff5722;
+        }
+        .search-auth {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .search-box {
+            position: relative;
+        }
+        .search-box input {
+            padding: 8px 35px 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background-color: #f5f5f5;
+            outline: none;
+            width: 200px;
+            transition: width 0.3s;
+        }
+        .search-box input:focus {
+            width: 250px;
+            background-color: #fff;
+            border-color: #ff5722;
+        }
+        .auth-links a {
+            font-size: 15px;
+            margin-left: 10px;
+            color: #666;
+        }
+        .auth-links a:hover {
+            color: #ff5722;
+        }
+
+        /* --- HERO BANNER --- */
+        .hero-banner {
+            background: linear-gradient(135deg, #fffcf6 0%, #fff3e0 100%);
+            padding: 50px 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .banner-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .banner-text {
+            max-width: 50%;
+        }
+        .banner-badge {
+            color: #ff9800;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .banner-title {
+            font-size: 32px;
+            color: #222;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        .banner-title span {
+            color: #ff5722;
+            font-weight: bold;
+        }
+        .banner-graphic {
+            width: 40%;
+            height: 180px;
+            background: linear-gradient(45deg, #ffe0b2, #fff3e0);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: #ffb74d;
+        }
+
+        /* --- QUICK NAV CARDS --- */
+        .quick-nav {
+            margin-top: -20px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .nav-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .nav-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        .card-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #222;
+        }
+        .card-info p {
+            font-size: 13px;
+            color: #888;
+        }
+        .card-arrow {
+            color: #ccc;
+            font-size: 20px;
+        }
+
+        /* --- MAIN CONTENT SECTION --- */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background-color: #ff5722;
+            border-radius: 2px;
+        }
+
+        /* Novel List Grid (Left Side) */
+        .novel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .novel-item {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            gap: 15px;
+            transition: box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+        .novel-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .novel-rank {
+            font-size: 18px;
+            font-weight: bold;
+            color: #bbb;
+            min-width: 20px;
+        }
+        .novel-item:nth-child(-n+3) .novel-rank {
+            color: #ff5722; /* Top 3 nổi bật */
+        }
+        .novel-cover {
+            width: 75px;
+            height: 100px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #aaa;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        .novel-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .novel-name {
+            font-size: 15px;
+            font-weight: bold;
+            color: #222;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .novel-tag {
+            font-size: 12px;
+            color: #888;
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            align-self: flex-start;
+        }
+
+        /* Sidebar Info List (Right Side) */
+        .sidebar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .sidebar-item {
+            padding: 10px 0;
+            border-bottom: 1px dashed #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+        .sidebar-item a {
+            color: #444;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-right: 10px;
+        }
+        .sidebar-item a:hover {
+            color: #ff5722;
+        }
+        .sidebar-arrow {
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        /* --- FLOATING WIDGET --- */
+        .floating-widget {
+            position: fixed;
+            right: 20px;
+            bottom: 100px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            width: 70px;
+            border: 1px solid #eee;
+            z-index: 999;
+        }
+        .widget-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 5px;
+            font-size: 11px;
+            color: #555;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            text-align: center;
+        }
+        .widget-btn:last-child {
+            border-bottom: none;
+        }
+        .widget-btn:hover {
+            background-color: #fff8f5;
+            color: #ff5722;
+        }
+        .widget-icon {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo-area">
+                <div class="logo-icon">番</div>
+                <div class="logo-text">番茄小说网</div>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="active">首页</a>
+                <a href="#">书库</a>
+                <a href="#">书架</a>
+                <a href="#">原创榜</a>
+                <a href="#">作家专区</a>
+                <a href="#">版权专区</a>
+            </nav>
+            <div class="search-auth">
+                <div class="search-box">
+                    <input type="text" placeholder="请输入书名 or 作者名...">
+                </div>
+                <div class="auth-links">
+                    <a href="#">登录</a> | <a href="#">注册</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="container banner-content">
+            <div class="banner-text">
+                <div class="banner-badge">重磅官宣</div>
+                <h1 class="banner-title">恭祝作者 <span>「东周公子南」</span> 晋升<br>番茄小说金番作家</h1>
+            </div>
+            <div class="banner-graphic">📖</div>
+        </div>
+    </section>
+
+    <section class="quick-nav">
+        <div class="container card-grid">
+            <div class="nav-card">
+                <div class="card-info">
+                    <h3>作家福利</h3>
+                    <p>番茄作家福利区</p>
+                </div>
+                <div class="card-arrow">➔</div>
+            </div>
+            <div class="nav-card">
+                <div class="card-info">
+                    <h3>作家专区</h3>
+                    <p>创建作品、查看作品数据及收益</p>
+                </div>
+                <div class="card-arrow">➔</div>
+            </div>
+            <div class="nav-card">
+                <div class="card-info">
+                    <h3>版权专区</h3>
+                    <p>优秀版权作品展示</p>
+                </div>
+                <div class="card-arrow">➔</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="main-layout">
+            
+            <section>
+                <h2 class="section-title">番茄巅峰榜</h2>
+                <div class="novel-grid">
+                    
+                    <div class="novel-item">
+                        <div class="novel-rank">19</div>
+                        <div class="novel-cover">Bìa Truyện</div>
+                        <div class="novel-details">
+                            <div class="novel-name">百鬼末世: 我成了最强御鬼师</div>
+                            <span class="novel-tag">悬疑灵异</span>
+                        </div>
+                    </div>
+
+                    <div class="novel-item">
+                        <div class="novel-rank">22</div>
+                        <div class="novel-cover">Bìa Truyện</div>
+                        <div class="novel-details">
+                            <div class="novel-name">异兽迷城</div>
+                            <span class="novel-tag">都市高武</span>
+                        </div>
+                    </div>
+
+                    <div class="novel-item">
+                        <div class="novel-rank">25</div>
+                        <div class="novel-cover">Bìa Truyện</div>
+                        <div class="novel-details">
+                            <div class="novel-name">全民大航海, 我开局一条幽灵船</div>
+                            <span class="novel-tag">游戏体育</span>
+                        </div>
+                    </div>
+
+                    <div class="novel-item">
+                        <div class="novel-rank">20</div>
+                        <div class="novel-cover">Bìa Truyện</div>
+                        <div class="novel-details">
+                            <div class="novel-name">系统赋我长生, 我熬死了所有人</div>
+                            <span class="novel-tag">玄幻脑洞</span>
+                        </div>
+                    </div>
+
+                    <div class="novel-item">
+                        <div class="novel-rank">23</div>
+                        <div class="novel-cover">Bìa Truyện</div>
+                        <div class="novel-details">
+                            <div class="novel-name">哈哈哈, 大明</div>
+                            <span class="novel-tag">历史古代</span>
+                        </div>
+                    </div>
+
+                    <div class="novel-item">
+                        <div class="novel-rank">26</div>
+                        <div class="novel-cover">Bìa Truyện</div>
+                        <div class="novel-details">
+                            <div class="novel-name">认路人甲当爹后我喜提反派全...</div>
+                            <span class="novel-tag">青春甜宠</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <aside>
+                <h2 class="section-title">最新资讯</h2>
+                <div class="sidebar-list">
+                    <div class="sidebar-item">
+                        <a href="#">2026年4月平台福利活动拟获奖作品公示</a>
+                        <span class="sidebar-arrow">➔</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <a href="#">番茄短故事2026全新西方题材赛道...</a>
+                        <span class="sidebar-arrow">➔</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <a href="#">「第五届网络文学大赛」中期大奖获...</a>
+                        <span class="sidebar-arrow">➔</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <a href="#">2026年4月番茄平台账号违规处罚...</a>
+                        <span class="sidebar-arrow">➔</span>
+                    </div>
+                    <div class="sidebar-item">
+                        <a href="#">番茄短故事 | 「IP金品共创计划」</a>
+                        <span class="sidebar-arrow">➔</span>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <div class="floating-widget">
+        <div class="widget-btn">
+            <div class="widget-icon">📱</div>
+            <div>番茄小说</div>
+        </div>
+        <div class="widget-btn">
+            <div class="widget-icon">❓</div>
+            <div>帮助中心</div>
+        </div>
+        <div class="widget-btn">
+            <div class="widget-icon">✍️</div>
+            <div>作家助手</div>
+        </div>
+    </div>
+
+</body>
+</html>
