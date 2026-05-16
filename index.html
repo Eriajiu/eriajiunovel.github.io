@@ -3,235 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chương 1: Khởi Đầu Mới | Thư Viện Của Tôi</title>
+    <title>Web Tiểu Thuyết Tự Động</title>
     <style>
-        /* --- Cấu hình Biến CSS (Variables) --- */
         :root {
-            --bg-color: #f4f1ea;       /* Màu nền giấy sách (Light mode) */
-            --text-color: #2b2b2b;     /* Màu chữ */
-            --header-bg: #ffffff;      /* Nền thanh công cụ */
-            --border-color: #e0dacb;   /* Màu đường viền */
-            --accent-color: #8b5a2b;   /* Màu điểm nhấn (Nút bấm, link) */
-            --font-size: 18px;         /* Cỡ chữ mặc định */
-            --line-height: 1.8;        /* Khoảng cách dòng */
+            --bg-color: #f4f1ea;
+            --text-color: #2b2b2b;
+            --panel-bg: #ffffff;
+            --border-color: #e0dacb;
         }
-
-        /* Giao diện Dark Mode */
         [data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --text-color: #c4c4c4;
-            --header-bg: #262626;
+            --bg-color: #121212;
+            --text-color: #cecece;
+            --panel-bg: #1e1e1e;
             --border-color: #333333;
-            --accent-color: #dca365;
         }
-
-        /* --- Reset & Base Styles --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
         body {
+            font-family: 'Georgia', serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Segoe UI', Georgia, Palatino, serif;
-            line-height: var(--line-height);
-            font-size: var(--font-size);
-            padding-top: 70px; /* Chừa khoảng trống cho fixed header */
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
         }
-
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        /* --- Thanh Công Cụ (Header) --- */
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background-color: var(--header-bg);
+            background-color: var(--panel-bg);
             border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            padding: 15px 20px;
+            position: sticky; top: 0; z-index: 100;
         }
-
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
+        .container { max-width: 700px; margin: 0 auto; padding: 20px; }
+        .flex-space { display: flex; justify-content: space-between; align-items: center; }
         .btn {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
+            background-color: var(--panel-bg); color: var(--text-color);
+            border: 1px solid var(--border-color); padding: 8px 15px;
+            cursor: pointer; border-radius: 5px; font-family: sans-serif;
         }
+        .btn-primary { background-color: #007bff; color: white; border: none; }
+        
+        /* Đọc truyện */
+        .chapter-select { width: 100%; padding: 10px; margin: 20px 0; font-size: 1rem; background: var(--panel-bg); color: var(--text-color); border: 1px solid var(--border-color); }
+        .novel-content h2 { font-size: 1.8rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .novel-content p { text-align: justify; text-indent: 30px; margin-bottom: 20px; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 40px; }
 
-        .btn:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
+        /* Khung Admin Đăng Bài */
+        .admin-panel {
+            margin-top: 80px; padding: 20px; background-color: var(--panel-bg);
+            border: 2px dashed #999; border-radius: 8px; font-family: sans-serif;
         }
-
-        /* --- Khu vực nội dung truyện --- */
-        .container {
-            max-width: 700px; /* Giới hạn độ rộng để mắt không phải dịch chuyển quá xa */
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .novel-meta {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 1px dashed var(--border-color);
-            padding-bottom: 20px;
-        }
-
-        .novel-title {
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-color);
-            margin-bottom: 8px;
-        }
-
-        .chapter-title {
-            font-size: 28px;
-            line-height: 1.3;
-            font-weight: 600;
-        }
-
-        /* Định dạng các đoạn văn trong truyện */
-        .novel-content p {
-            margin-bottom: 1.5em;
-            text-align: justify;
-            text-indent: 1.5em; /* Lùi đầu dòng chuẩn sách truyện */
-        }
-
-        /* --- Thanh chuyển chương cuối bài --- */
-        .chapter-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .chapter-actions .btn {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-
-        /* Footer nhỏ gọn */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            font-size: 14px;
-            color: var(--text-color);
-            opacity: 0.6;
-        }
-
-        /* Tối ưu hóa cho màn hình nhỏ (Mobile) */
-        @media (max-width: 768px) {
-            body {
-                font-size: 17px; /* Chữ nhỏ hơn một chút trên mobile */
-            }
-            .container {
-                padding: 15px;
-            }
-            .chapter-title {
-                font-size: 24px;
-            }
-            .novel-content p {
-                text-indent: 1em; /* Giảm lùi đầu dòng trên màn hình hẹp */
-            }
+        .admin-panel input, .admin-panel textarea {
+            width: 100%; padding: 10px; margin: 8px 0;
+            box-sizing: border-box; border: 1px solid var(--border-color);
+            background: var(--bg-color); color: var(--text-color);
         }
     </style>
 </head>
 <body>
 
-    <!-- Thanh công cụ phía trên -->
     <header>
-        <div class="nav-links">
-            <a href="#" class="btn">≡ Mục Lục</a>
-            <a href="#" style="font-weight: bold;">Thư Viện</a>
-        </div>
-        
-        <div class="settings">
-            <!-- Nút chuyển đổi Dark/Light mode -->
-            <button class="btn" id="theme-toggle">🌙 Tối</button>
+        <div class="container flex-space">
+            <h1>Truyện Của Tôi</h1>
+            <button class="btn" id="theme-toggle">Chế độ tối</button>
         </div>
     </header>
 
-    <!-- Nội dung chính của truyện -->
     <main class="container">
+        <!-- Bộ đọc truyện -->
+        <select id="chapter-dropdown" class="chapter-select"></select>
         
-        <!-- Phần thông tin chương -->
-        <section class="novel-meta">
-            <h2 class="novel-title">Tên Truyện Của Bạn</h2>
-            <h1 class="chapter-title">Chương 1: Khởi Đầu Mới</h1>
-        </section>
-
-        <!-- Phần nội dung chữ -->
         <article class="novel-content">
-            <p>Gió đêm lướt qua những tán lá xào xạc, mang theo hơi lạnh của những ngày chớm thu. Giữa căn phòng nhỏ được thắp sáng bởi ánh đèn dầu leo lét, hắn đang ngồi lặng lẽ nhìn vào cuốn sổ cũ kỹ lật mở trên bàn.</p>
-            
-            <p>Những ký tự trên trang giấy dường như đang nhảy múa dưới ánh lửa vặn vẹo. Đối với hắn, hành trình này mới chỉ là khởi đầu. Thế giới rộng lớn ngoài kia ẩn chứa biết bao bí ẩn chưa có lời giải đáp, và hắn – một kẻ lữ hành cô độc – sẽ phải tự mình bước đi trên con đường đầy gai góc.</p>
-            
-            <p>Hắn khẽ thở dài, khép cuốn sổ lại. Tiếng "bạch" khô khốc vang lên trong không gian tĩnh mịch. Đã đến lúc phải lên đường.</p>
-            
-            <p>"Cho dù phía trước là vực sâu hay là bóng tối vĩnh hằng," hắn thì thầm, ánh mắt lộ ra vẻ kiên định chưa từng có, "ta cũng sẽ không quay đầu."</p>
+            <h2 id="chapter-title">Đang tải dữ liệu...</h2>
+            <div id="chapter-text"></div>
         </article>
 
-        <!-- Điều hướng chương -->
-        <section class="chapter-actions">
-            <a href="#" class="btn">◀ Chương Trước</a>
-            <a href="#" class="btn">Chương Tiếp ▶</a>
-        </section>
+        <div class="nav-buttons">
+            <button class="btn" id="prev-btn">◀ Trước</button>
+            <button class="btn" id="next-btn">Sau ▶</button>
+        </div>
 
+        <hr style="margin-top: 60px; border: 0; border-top: 1px solid var(--border-color);">
+
+        <!-- KHU VỰC ĐĂNG TIỂU THUYẾT TRỰC TIẾP -->
+        <section class="admin-panel">
+            <h3>🔑 Khu Vực Đăng Chương Mới</h3>
+            <p style="font-size: 0.85rem; color: gray;">Giao diện này giúp bạn lưu thẳng nội dung lên GitHub mà không cần mở code.</p>
+            
+            <input type="password" id="github-token" placeholder="Dán GitHub Personal Access Token vào đây...">
+            <input type="text" id="new-id" placeholder="Mã chương (Ví dụ: chuong-3)">
+            <input type="text" id="new-title" placeholder="Tiêu đề chương (Ví dụ: Chương 3: Lật Đổ)">
+            <textarea id="new-content" rows="8" placeholder="Nhập nội dung truyện tại đây. Xuống dòng tự động tính là một đoạn văn mới..."></textarea>
+            
+            <button class="btn btn-primary" id="publish-btn">🚀 Đăng Chương Mới</button>
+            <p id="status-msg" style="font-weight: bold; margin-top: 10px;"></p>
+        </section>
     </main>
 
-    <footer>
-        <p>© 2026 Powered by GitHub Pages</p>
-    </footer>
+    <!-- NƠI LƯU TRỮ DỮ LIỆU TRUYỆN (Sẽ bị ghi đè tự động khi bạn bấm Đăng) -->
+    <script id="novel-database">
+        const novelData = {
+  "chuong-1": {
+    "title": "Chương 1: Khởi đầu mới",
+    "content": [
+      "Đây là dòng đầu tiên của chương một. Ánh bình minh lấp ló sau lũy tre làng.",
+      "Nhân vật chính bước ra khỏi hiên nhà, sẵn sàng cho một hành trình mới."
+    ]
+  },
+  "chuong-2": {
+    "title": "Chương 2: Gặp gỡ định mệnh",
+    "content": [
+      "Thành phố sầm uất hiện ra trước mắt.",
+      "Tại quán nước ven đường, một người lạ mặt đã đợi sẵn..."
+    ]
+  }
+};
+    </script>
 
-    <!-- Script xử lý chuyển đổi giao diện sáng/tối -->
+    <!-- LOGIC VẬN HÀNH BỘ ĐỌC VÀ ĐĂNG BÀI -->
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const currentTheme = localStorage.getItem('theme');
+        // Cấu hình GitHub của bạn (HÃY SỬA 2 DÒNG NÀY CHO ĐÚNG)
+        const GH_USER = "TÊN_TÀI_KHOẢN_GITHUB_CỦA_BẠN"; 
+        const GH_REPO = "TÊN_KHO_CHỨA_TRUYỆN"; 
 
-        // Kiểm tra nếu người dùng đã có tùy chọn từ trước
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            if (currentTheme === 'dark') {
-                themeToggle.textContent = '☀️ Sáng';
-            }
+        const keys = Object.keys(novelData);
+        let currentIdx = 0;
+
+        // Dom Elements đọc truyện
+        const dropdown = document.getElementById('chapter-dropdown');
+        const cTitle = document.getElementById('chapter-title');
+        const cText = document.getElementById('chapter-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function init() {
+            dropdown.innerHTML = "";
+            keys.forEach(k => {
+                let opt = document.createElement('option');
+                opt.value = k; opt.innerText = novelData[k].title;
+                dropdown.appendChild(opt);
+            });
+            render(keys[0]);
         }
 
-        // Lắng nghe sự kiện click nút đổi giao diện
-        themeToggle.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            
-            if (theme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-                themeToggle.textContent = '🌙 Tối';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeToggle.textContent = '☀️ Sáng';
+        function render(key) {
+            if(!novelData[key]) return;
+            cTitle.innerText = novelData[key].title;
+            cText.innerHTML = novelData[key].content.map(p => `<p>${p}</p>`).join('');
+            dropdown.value = key;
+            currentIdx = keys.indexOf(key);
+            prevBtn.disabled = currentIdx === 0;
+            nextBtn.disabled = currentIdx === keys.length - 1;
+        }
+
+        dropdown.addEventListener('change', (e) => render(e.target.value));
+        prevBtn.addEventListener('click', () => render(keys[currentIdx - 1]));
+        nextBtn.addEventListener('click', () => render(keys[currentIdx + 1]));
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.setAttribute('data-theme', document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        });
+        init();
+
+        // --- XỬ LÝ ĐĂNG TRUYỆN TRỰC TIẾP LÊN GITHUB ---
+        document.getElementById('publish-btn').addEventListener('click', async () => {
+            const token = document.getElementById('github-token').value.trim();
+            const id = document.getElementById('new-id').value.trim();
+            const title = document.getElementById('new-title').value.trim();
+            const text = document.getElementById('new-content').value.trim();
+            const status = document.getElementById('status-msg');
+
+            if (!token || !id || !title || !text) {
+                status.innerText = "❌ Vui lòng điền đầy đủ tất cả các ô!";
+                status.style.color = "red";
+                return;
+            }
+
+            status.innerText = "⏳ Đang kết nối GitHub và xử lý dữ liệu...";
+            status.style.color = "orange";
+
+            try {
+                // 1. Cập nhật dữ liệu tạm trong bộ nhớ
+                const paragraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
+                novelData[id] = { title: title, content: paragraphs };
+
+                // 2. Lấy nội dung file index.html hiện tại từ GitHub để lấy mã SHA (bắt buộc của GitHub API)
+                const url = `https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/index.html`;
+                const getRes = await fetch(url, {
+                    headers: { "Authorization": `token ${token}` }
+                });
+                
+                if (!getRes.ok) throw new Error("Không tìm thấy file hoặc Token sai!");
+                const fileData = await getRes.json();
+                const sha = fileData.sha;
+                const oldContent = decodeURIComponent(escape(atob(fileData.content)));
+
+                // 3. Thay thế khối dữ liệu cũ bằng khối dữ liệu mới trong chuỗi mã nguồn
+                const regex = /<script id="novel-database">([\s\S]*?)<\/script>/;
+                const newDataScript = `<script id="novel-database">\n        const novelData = ${JSON.stringify(novelData, null, 2)};\n    <\/script>`;
+                const updatedHtml = oldContent.replace(regex, newDataScript);
+
+                // 4. Đẩy file đã cập nhật ngược trở lại GitHub
+                const putRes = await fetch(url, {
+                    method: "PUT",
+                    headers: {
+                        "Authorization": `token ${token}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: `Đăng chương mới: ${title}`,
+                        content: btoa(unescape(encodeURIComponent(updatedHtml))),
+                        sha: sha
+                    })
+                });
+
+                if (putRes.ok) {
+                    status.innerText = "🎉 Đăng truyện thành công! GitHub đang cập nhật website (mất khoảng 1 phút).";
+                    status.style.color = "green";
+                    // Reset form
+                    document.getElementById('new-id').value = "";
+                    document.getElementById('new-title').value = "";
+                    document.getElementById('new-content').value = "";
+                } else {
+                    throw new Error("Lỗi khi ghi đè file lên GitHub.");
+                }
+
+            } catch (err) {
+                status.innerText = `❌ Thất bại: ${err.message}`;
+                status.style.color = "red";
             }
         });
     </script>
