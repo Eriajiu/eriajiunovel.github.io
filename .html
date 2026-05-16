@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome để dùng icon (Star, Fork,...) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <i class="fa-brands fa-github logo"></i>
+            <nav>
+                <a href="#">Dashboard</a>
+                <a href="#">Pull requests</a>
+                <a href="#">Issues</a>
+                <a href="#">Marketplace</a>
+                <a href="#">Explore</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        
+        <!-- Sidebar (Thông tin cá nhân) -->
+        <aside class="sidebar">
+            <div class="avatar-container">
+                <!-- Thay link ảnh của bạn vào đây -->
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500" alt="Avatar" class="avatar">
+            </div>
+            <h1 class="name">Nguyễn Văn A</h1>
+            <h2 class="username">username123</h2>
+            <p class="bio">Artist & Frontend Developer. Yêu thích nghệ thuật truyền thống và công nghệ. 🎨💻</p>
+            <button class="edit-btn">Edit profile</button>
+            
+            <div class="followers-info">
+                <i class="fa-solid fa-users"></i>
+                <span><b>150</b> followers</span> · <span><b>90</b> following</span>
+            </div>
+        </aside>
+
+        <!-- Main Section (Repositories) -->
+        <main class="main-content">
+            <!-- Tabs điều hướng nhỏ -->
+            <div class="profile-tabs">
+                <a href="#" class="tab active"><i class="fa-regular fa-book-open"></i> Overview</a>
+                <a href="#" class="tab"><i class="fa-solid fa-box"></i> Repositories <span class="badge">12</span></a>
+                <a href="#" class="tab"><i class="fa-regular fa-rectangle-list"></i> Projects</a>
+            </div>
+
+            <!-- Danh sách Repositories ghim (Pinned) -->
+            <h3 class="section-title">Popular repositories</h3>
+            <div class="repo-grid">
+                
+                <!-- Repo 1 -->
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <a href="#" class="repo-name">my-awesome-art-project</a>
+                        <span class="visibility">Public</span>
+                    </div>
+                    <p class="repo-desc">Trưng bày các tác phẩm nghệ thuật chất liệu truyền thống kết hợp kỹ thuật số.</p>
+                    <div class="repo-footer">
+                        <span class="lang"><span class="lang-color html"></span>HTML</span>
+                        <span class="stat"><i class="fa-regular fa-star"></i> 42</span>
+                        <span class="stat"><i class="fa-solid fa-code-fork"></i> 12</span>
+                    </div>
+                </div>
+
+                <!-- Repo 2 -->
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <a href="#" class="repo-name">personal-library-app</a>
+                        <span class="visibility">Public</span>
+                    </div>
+                    <p class="repo-desc">Ứng dụng quản lý thư viện truyện cá nhân, hỗ trợ đọc offline và đồng bộ dữ liệu.</p>
+                    <div class="repo-footer">
+                        <span class="lang"><span class="lang-color js"></span>JavaScript</span>
+                        <span class="stat"><i class="fa-regular fa-star"></i> 89</span>
+                        <span class="stat"><i class="fa-solid fa-code-fork"></i> 34</span>
+                    </div>
+                </div>
+
+                <!-- Repo 3 -->
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <a href="#" class="repo-name">css-portfolio-template</a>
+                        <span class="visibility">Public</span>
+                    </div>
+                    <p class="repo-desc">Template portfolio tối giản, mượt mà viết hoàn toàn bằng HTML và CSS thuần.</p>
+                    <div class="repo-footer">
+                        <span class="lang"><span class="lang-color css"></span>CSS</span>
+                        <span class="stat"><i class="fa-regular fa-star"></i> 15</span>
+                        <span class="stat"><i class="fa-solid fa-code-fork"></i> 3</span>
+                    </div>
+                </div>
+
+                <!-- Repo 4 -->
+                <div class="repo-card">
+                    <div class="repo-header">
+                        <a href="#" class="repo-name">learning-data-structures</a>
+                        <span class="visibility">Public</span>
+                    </div>
+                    <p class="repo-desc">Nơi lưu trữ các bài tập và cấu trúc dữ liệu giải thuật cơ bản trong quá trình tự học.</p>
+                    <div class="repo-footer">
+                        <span class="lang"><span class="lang-color python"></span>Python</span>
+                        <span class="stat"><i class="fa-regular fa-star"></i> 7</span>
+                        <span class="stat"><i class="fa-solid fa-code-fork"></i> 2</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>
